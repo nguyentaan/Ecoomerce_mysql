@@ -1,27 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const { validateAdmin, validateUser } = require("../validator/UsersValidator");
-const usersController = require("../controller/UsersController");
-const usersControllerDyamoDB = require("../controller/UsersControllerDyamoDB");
+// const usersController = require("../controller/UsersController");
+const userControllerMySQL = require("../controller/UsersControllerMySQL");
 
-//For the MongoDB database -- Start Here
-// router.post("/register", usersController.register);
-// router.post("/login", usersController.login);
-// router.post("/loginadmin", usersController.loginAdmin);
-// router.get("/get", usersController.getAllUsers);
-// router.get("/get/:userId", validateAdmin, usersController.getUserId);
-// router.delete("/delete/:userId", validateAdmin, usersController.deleteById);
-//For the MongoDB database -- End Here
+//For the MYSQL database -- Start Here
+router.post("/register", userControllerMySQL.register);
+router.post("/login", userControllerMySQL.login);
+router.post("/loginadmin", userControllerMySQL.loginAdmin);
+router.get("/get", userControllerMySQL.getAllUsers);
+router.get("/get/:userId", userControllerMySQL.getUserId);
+router.delete("/delete/:userId", userControllerMySQL.deleteById);
+// router.get("/get/:userId", validateAdmin, userControllerMySQL.getUserId);
+// router.delete("/delete/:userId", validateAdmin, userControllerMySQL.deleteById);
 
-//For the DyamoDB database -- Start Here
-//Test Ok
-router.get("/get", usersControllerDyamoDB.getAllUsersController);
-router.get("/get/:email", usersControllerDyamoDB.getUserEmailController);
-router.delete("/delete/:email", usersControllerDyamoDB.deleteUserController);
-router.post("/login", usersControllerDyamoDB.login);
-router.post("/loginadmin", usersControllerDyamoDB.loginAdmin);
-router.post("/register", usersControllerDyamoDB.registerUSer);
-//Un-Test
-//For the DyamoDB database -- End Here
+
 
 module.exports = router;
